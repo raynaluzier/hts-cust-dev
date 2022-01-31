@@ -84,13 +84,16 @@ resource "aws_instance" "vm" {
   
   vpc_security_group_ids               = [data.aws_security_group.target.id]
   associate_public_ip_address          = data.aws_subnet.target.map_public_ip_on_launch
-  capacity_reservation_preference      = "open"
   disable_api_termination              = true
   instance_initiated_shutdown_behavior = "stop"
   
   tenancy           = "shared"
   key_name          = data.aws_key_pair.target.key_name
   availability_zone = "${var.region}${random_shuffle.zone.result}"
+
+  capacity_reservation_specification {
+      capacity_reservation_preference = "open"
+  }
 
   root_block_device {
       delete_on_termination = true
