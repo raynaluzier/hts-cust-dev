@@ -52,7 +52,7 @@ data "aws_key_pair" "target" {
 ## Get the target security group to add the instance
 data "aws_security_group" "target" {
     filter {
-        name   = "tag:Name"
+        name   = "name"
         values = [var.sec_grp_name]
     }
 }
