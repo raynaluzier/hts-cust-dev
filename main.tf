@@ -87,13 +87,8 @@ resource "aws_instance" "vm" {
   disable_api_termination              = true
   instance_initiated_shutdown_behavior = "stop"
   
-  tenancy           = "shared"
   key_name          = data.aws_key_pair.target.key_name
   availability_zone = "${var.region}${random_shuffle.zone.result}"
-
-  capacity_reservation_specification {
-      capacity_reservation_preference = "open"
-  }
 
   root_block_device {
       delete_on_termination = true
