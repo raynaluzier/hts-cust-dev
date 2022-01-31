@@ -95,7 +95,7 @@ resource "aws_instance" "vm" {
   root_block_device {
       delete_on_termination = true
       encrypted             = false
-      volume_size           = var.root_var_size
+      volume_size           = var.root_vol_size
       volume_type           = "gp3"
   }
   
