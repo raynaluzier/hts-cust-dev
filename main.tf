@@ -28,7 +28,7 @@ locals {
 ## Lookup the target VPC to place the instance
 data "aws_vpc" "target" {
   filter {
-      name   = "name"
+      name   = "tag:Name"
       values = [var.vpc_name]
   }
 }
@@ -36,7 +36,7 @@ data "aws_vpc" "target" {
 ## Lookup the target subnet to place the instance
 data "aws_subnet" "target" {
     filter {
-        name   = "name"
+        name   = "tag:Name"
         values = [var.subnet_name]
     }
 }
