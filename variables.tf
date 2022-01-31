@@ -14,7 +14,13 @@ variable "vpc_name" {
 variable "subnet_name" {
     description = "Target subnet to which the VM will be deployed"
     type        = string
-    default     = "us-east-1"
+    default     = "sub_16"
+}
+
+variable "sec_grp_name" {
+    description = "Target security group to which the VM will be joined"
+    type        = string
+    default     = "hts-test-sg"
 }
 
 ## Virtual Machine Info ##
@@ -24,9 +30,21 @@ variable "instance_type" {
     default     = "m5.large"
 }
 
+variable "root_vol_size" {
+    description = "Size (GB) of root volume for the AWS instance being deployed"
+    type        = number
+    default     = 50
+}
+
+variable "ssh_key_name" {
+    description = "SSH key name to apply to the VM; unique to each account"
+    type        = string
+    default     = ""
+}
+
 ## Tag Variable Info ##
 variable "tag_name" {
-    description = "Name of virtual machine; populates Name tag"
+    description = "Name of VM; populates Name tag"
     type        = string
     default     = ""
 }

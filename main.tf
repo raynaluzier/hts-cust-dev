@@ -25,7 +25,7 @@ locals {
     }
 }
 
-## Lookup the target VPC to place the instance
+## Get the target VPC to place the instance
 data "aws_vpc" "target" {
   filter {
       name   = "tag:Name"
@@ -33,7 +33,7 @@ data "aws_vpc" "target" {
   }
 }
 
-## Lookup the target subnet to place the instance
+## Get the target subnet to place the instance
 data "aws_subnet" "target" {
     filter {
         name   = "tag:Name"
@@ -41,7 +41,23 @@ data "aws_subnet" "target" {
     }
 }
 
-## Lookup the AMI for the Ubuntu image
+## Get the target key pair to use on the instance
+data "aws_key_pair" "target" {
+    filter {
+        name   = "key-name"
+        values = [var.ssh_key_name]
+    }
+}
+
+## Get the target security group to add the instance
+data "aws_security_group" "target" {
+    filter {
+        name   = "tag:Name"
+        values = [var.sec_grp_name]
+    }
+}
+
+## Get the AMI for the Ubuntu image
 data "aws_ami" "ubuntu" {
   most_recent = true
 
@@ -53,11 +69,35 @@ data "aws_ami" "ubuntu" {
   owners = ["099720109477"] # Canonical
 }
 
+## Gets randomly selected letter between a-f 
+#  This value will be appended to region below to select availability zone
+resource "random_shuffle" "zone" {
+    input        = ["a", "b", "c", "d", "e", "f"]
+    result_count = 1
+}
+
 ## Define the EC2 Instance resource
 resource "aws_instance" "vm" {
   ami           = data.aws_ami.ubuntu.id
   instance_type = var.instance_type
   subnet_id     = data.aws_subnet.target.id
+  
+  vpc_security_group_ids               = [data.aws_security_group.target.id]
+  associate_public_ip_address          = data.aws_subnet.target.map_public_ip_on_launch
+  capacity_reservation_preference      = "open"
+  disable_api_termination              = true
+  instance_initiated_shutdown_behavior = "stop"
+  
+  tenancy           = "shared"
+  key_name          = data.aws_key_pair.target.key_name
+  availability_zone = "${var.region}${random_shuffle.zone.result}"
 
+  root_block_device {
+      delete_on_termination = true
+      encrypted             = false
+      volume_size           = var.root_var_size
+      volume_type           = "gp3"
+  }
+  
   tags = local.tags
 }
