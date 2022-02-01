@@ -13,3 +13,4 @@ jobs:
         with:
           owner: 'raynaluzier'
           repository: 'hts-cust-dev'
+          access-token: ${{ secrets.GH_TOKEN }}
