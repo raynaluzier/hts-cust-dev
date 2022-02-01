@@ -86,7 +86,6 @@ data "aws_ami" "ubuntu" {
   owners = ["099720109477"] # Canonical
 }
 
-/*
 ## Define the EC2 Instance resource
 resource "aws_instance" "vm" {
   ami           = data.aws_ami.ubuntu.id
@@ -110,4 +109,3 @@ resource "aws_instance" "vm" {
   
   tags = local.tags
 }
-*/

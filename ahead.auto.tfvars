@@ -6,7 +6,7 @@ sec_grp_name     = "hts-test-sg"
 
 ## Virtual Machine Info ##
 instance_type    = "t2.micro"
-root_vol_size    = 50
+root_vol_size    = 60
 ssh_key_name     = "rel-hts-013122"
 
 tag_name         = "hts-test-1"
