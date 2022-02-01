@@ -27,6 +27,13 @@ locals {
   random = join(",", random_shuffle.zone.result)  
 }
 
+## Gets randomly selected letter between a-f 
+#  This value will be appended to region below to select availability zone
+resource "random_shuffle" "zone" {
+    input        = ["a", "b", "c", "d", "e", "f"]
+    result_count = 1
+}
+
 ## Get the target availability zone, using a random name suffix to select
 data "aws_availability_zone" "target" {
   filter {
@@ -77,13 +84,6 @@ data "aws_ami" "ubuntu" {
   }
 
   owners = ["099720109477"] # Canonical
-}
-
-## Gets randomly selected letter between a-f 
-#  This value will be appended to region below to select availability zone
-resource "random_shuffle" "zone" {
-    input        = ["a", "b", "c", "d", "e", "f"]
-    result_count = 1
 }
 
 ## Define the EC2 Instance resource
