@@ -5,6 +5,20 @@ on:
       - 'development'
       
 jobs:
+  setup-terraform:
+    runs-on: ubuntu-latest
+    steps:
+      - name: HashiCorp - Setup Terraform
+        uses: hashicorp/setup-terraform@v1.2.1
+        with:
+          # The hostname of a Terraform Cloud instance to place within the credentials block of the Terraform CLI configuration file. Defaults to `app.terraform.io`.
+          cli_config_credentials_hostname: app.terraform.io
+          # The API token for a Terraform Cloud/Enterprise instance to place within the credentials block of the Terraform CLI configuration file.
+          cli_config_credentials_token: ${{ secrets.TFC_TOKEN }}
+          terraform_version: latest
+          # Whether or not to install a wrapper to wrap subsequent calls of the `terraform` binary and expose its STDOUT, STDERR, and exit code as outputs named `stdout`, `stderr`, and `exitcode` respectively. Defaults to `true`.
+          terraform_wrapper: true
+  
   format:
     name: Format and Lint Terraform Configuration
     runs-on: ubuntu-latest
@@ -12,8 +26,8 @@ jobs:
       - uses: actions/checkout@v2
         with:
           ref: ${{ github.event.pull_request.head.ref }}
-      - name: Format and Validate Terrform Configuration
-        run: |
-          terraform init
-          terraform validate -json
-          terraform fmt -check -recursive
+    - name: Format and Validate Terrform Configuration
+      run: |
+        terraform init
+        terraform validate -json
+        terraform fmt -check -recursive
