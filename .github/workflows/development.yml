@@ -1,0 +1,15 @@
+name: Pre-Merge Development Validation
+on:
+  push:
+    branches:
+      - 'development'
+      
+jobs:
+  clone-dev-repo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone Github Repo Action
+        uses: GuillaumeFalourd/clone-github-repo-action@v1
+        with:
+          owner: 'raynaluzier'
+          repository: 'hts-cust-dev'
