@@ -24,7 +24,7 @@ locals {
         SupportTeam  = var.tag_supportteam
     }
 
-    random = tostring(random_shuffle.zone.result)
+    #random = random_shuffle.zone.result
 }
 
 ## Get the target VPC to place the instance
@@ -90,7 +90,7 @@ resource "aws_instance" "vm" {
   instance_initiated_shutdown_behavior = "stop"
   
   key_name          = data.aws_key_pair.target.key_name
-  availability_zone = "${var.region}${local.random}"
+  #availability_zone = "${var.region}${local.random}"
 
   root_block_device {
       delete_on_termination = true
