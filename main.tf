@@ -14,16 +14,17 @@ provider "aws" {
 
 locals {
     # Define the map of mandatory tags
-    tags = {
-        Name         = var.tag_name
-        CostCenter   = var.tag_costcenter
-        BusinessUnit = var.tag_businessunit
-        Product      = var.tag_product
-        Application  = var.tag_application
-        Environment  = var.tag_environment
-        SupportTeam  = var.tag_supportteam
-    }
+  tags = {
+      Name         = var.tag_name
+      CostCenter   = var.tag_costcenter
+      BusinessUnit = var.tag_businessunit
+      Product      = var.tag_product
+      Application  = var.tag_application
+      Environment  = var.tag_environment
+      SupportTeam  = var.tag_supportteam
+  }
 
+  random = join(",", random_shuffle.zone.result)  
 }
 
 ## Get the target VPC to place the instance
@@ -89,7 +90,7 @@ resource "aws_instance" "vm" {
   instance_initiated_shutdown_behavior = "stop"
   
   key_name          = data.aws_key_pair.target.key_name
-  availability_zone = "${var.region}join(',', ${random_shuffle.zone.result})"
+  availability_zone = "${var.region}${local.random}"
 
   root_block_device {
       delete_on_termination = true
