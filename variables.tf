@@ -11,11 +11,13 @@ variable "vpc_name" {
     default     = "us-east-1"
 }
 
+/*
 variable "subnet_name" {
     description = "Target subnet to which the VM will be deployed"
     type        = string
     default     = "sub_16"
 }
+*/
 
 variable "sec_grp_name" {
     description = "Target security group to which the VM will be joined"
