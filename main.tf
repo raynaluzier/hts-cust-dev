@@ -38,7 +38,7 @@ resource "random_shuffle" "zone" {
 data "aws_availability_zone" "target" {
   filter {
     name     = "zone-name"
-    values   = "${var.region}${local.random}"
+    values   = ["${var.region}${local.random}"]
   }
 }
 
