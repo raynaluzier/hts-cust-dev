@@ -88,7 +88,7 @@ resource "aws_instance" "vm" {
   instance_initiated_shutdown_behavior = "stop"
   
   key_name          = data.aws_key_pair.target.key_name
-  availability_zone = "${var.region}${random_shuffle.zone.result}"
+  availability_zone = "${var.region}tostring(${random_shuffle.zone.result})"
 
   root_block_device {
       delete_on_termination = true
