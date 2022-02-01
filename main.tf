@@ -27,20 +27,28 @@ locals {
   random = join(",", random_shuffle.zone.result)  
 }
 
-## Get the target VPC to place the instance
-data "aws_vpc" "target" {
+## Get the target availability zone, using a random name suffix to select
+data "aws_availability_zone" "target" {
   filter {
-      name   = "tag:Name"
-      values = [var.vpc_name]
+    name     = "zone-name"
+    values   = "${var.region}${local.random}"
   }
 }
 
 ## Get the target subnet to place the instance
 data "aws_subnet" "target" {
     filter {
-        name   = "tag:Name"
-        values = [var.subnet_name]
+        name   = "availability-zone"
+        values = [data.aws_availability_zone.target.name]
     }
+}
+
+## Get the target VPC to place the instance
+data "aws_vpc" "target" {
+  filter {
+      name   = "tag:Name"
+      values = [var.vpc_name]
+  }
 }
 
 ## Get the target key pair to use on the instance
@@ -90,7 +98,7 @@ resource "aws_instance" "vm" {
   instance_initiated_shutdown_behavior = "stop"
   
   key_name          = data.aws_key_pair.target.key_name
-  availability_zone = "${var.region}${local.random}"
+  availability_zone = data.aws_availability_zone.target.name
 
   root_block_device {
       delete_on_termination = true
