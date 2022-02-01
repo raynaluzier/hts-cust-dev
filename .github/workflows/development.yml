@@ -5,12 +5,15 @@ on:
       - 'development'
       
 jobs:
-  clone-dev-repo:
+  format:
+    name: Format and Lint Terraform Configuration
     runs-on: ubuntu-latest
     steps:
-      - name: Clone Github Repo Action
-        uses: GuillaumeFalourd/clone-github-repo-action@v1
+      - uses: actions/checkout@v2
         with:
-          owner: 'raynaluzier'
-          repository: 'hts-cust-dev'
-          access-token: ${{ secrets.GH_TOKEN }}
+          ref: ${{ github.event.pull_request.head.ref }}
+      - name: Format and Validate Terrform Configuration
+        run: |
+          terraform init
+          terraform validate -json
+          terraform fmt -check -recursive
