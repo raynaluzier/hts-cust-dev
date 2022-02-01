@@ -16,8 +16,8 @@ module "ubuntu-vm" {
   source  = "app.terraform.io/raynaluzier/ec2-ubuntu/aws"
   version = "0.0.1"
 
-  #source  = "github.com/orgs/hearst-terraform-modules/terraform-aws-ec2-ubuntu"
-  #version = "0.0.1"
+  ##source  = "github.com/orgs/hearst-terraform-modules/terraform-aws-ec2-ubuntu"
+  ##version = "0.0.1"
 
   region           = var.region
   vpc_name         = var.vpc_name
