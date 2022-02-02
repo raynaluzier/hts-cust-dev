@@ -27,7 +27,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: hashicorp/setup-terraform@v1.2.1
 
-    - name: Check Terraform Format
-      id: fmt
-      run: terraform fmt -check
-      continue-on-error: true
+      - name: Check Terraform Format
+        id: fmt
+        run: terraform fmt -check
+        continue-on-error: true
