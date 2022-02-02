@@ -1,4 +1,17 @@
 ## Environment Info ##
+variable "access_key" {
+  description = "Access key for AWS account that will be performing the deployment"
+  type        = string
+  default     = "" 
+}
+
+variable "secret_key" {
+  description = "Secret key for AWS account that will be performing the deployment"
+  type        = string
+  default     = ""
+  sensitive   = true
+}
+
 variable "region" {
   description = "Target region to which the VM will be deployed"
   type        = string
