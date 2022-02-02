@@ -29,5 +29,5 @@ jobs:
 
       - name: Check Terraform Format
         id: fmt
-        run: terraform fmt -check
+        run: terraform fmt -list=true -write=false -diff=true
         continue-on-error: false
