@@ -30,4 +30,4 @@ jobs:
       - name: Check Terraform Format
         id: fmt
         run: terraform fmt -check
-        continue-on-error: true
+        continue-on-error: false
