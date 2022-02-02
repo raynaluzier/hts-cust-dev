@@ -22,13 +22,12 @@ jobs:
         run: terraform fmt -list=true -write=false -diff=true
         continue-on-error: true
 
-      - name: Terraform Validate
-        id: validate
-        run: terraform validate -no-color
-        
       - name: Terraform Init
         id: init
         run: terraform init  
+      - name: Terraform Validate
+        id: validate
+        run: terraform validate -no-color
 
       - name: Terraform Plan
         id: plan
