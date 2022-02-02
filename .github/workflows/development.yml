@@ -1,6 +1,6 @@
 name: Development Check and Validation
 on:
-  pull_request:
+  push:  ## Change to pull_request
     branches:
       - 'development'
 
