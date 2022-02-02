@@ -6,6 +6,7 @@ on:
       
 jobs:
   setup-terraform:
+    name: Setup Terraform
     runs-on: ubuntu-latest
     steps:
       - name: HashiCorp - Setup Terraform
@@ -24,10 +25,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-        with:
-          ref: ${{ github.event.pull_request.head.ref }}
-    - name: Format and Validate Terrform Configuration
-      run: |
-        terraform init
-        terraform validate -json
-        terraform fmt -check -recursive
+      - uses: hashicorp/setup-terraform@v1.2.1
+
+    - name: Check Terraform Format
+      id: fmt
+      run: terraform fmt -check
+      continue-on-error: true
