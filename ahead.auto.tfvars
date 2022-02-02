@@ -1,6 +1,6 @@
 ## Environment Info ##
 region       = "us-east-1"
-vpc_name     = "vpc_useast1"  # HNP-NonProduction-VPC-US-East, HNP-Production-VPC-US-East
+vpc_name     = "vpc_useast1" # HNP-NonProduction-VPC-US-East, HNP-Production-VPC-US-East
 sec_grp_name = "hts-test-sg"
 
 ## Virtual Machine Info ##
