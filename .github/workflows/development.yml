@@ -44,7 +44,7 @@ jobs:
         env:
           PLAN: ${{ steps.plan.outputs.stdout }}
         with:
-          github_token: ${{ secrets.GH_TOKEN }}
+          #github_token: ${{ secrets.GH_TOKEN }}
           script: |
             const output = 
             #### Terraform Format:          \`${{ steps.fmt.outcome }}\`
