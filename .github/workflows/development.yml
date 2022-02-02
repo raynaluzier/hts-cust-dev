@@ -9,35 +9,38 @@ jobs:
     name: Setup Terraform
     runs-on: ubuntu-latest
     steps:
-      - name: Setup Terraform
+      #- name: Setup Terraform
+        uses: actions/checkout@v2
         uses: hashicorp/setup-terraform@v1.2.1
         with:
-          cli_config_credentials_hostname: 'app.terraform.io/app/RaynaLuzier/workspaces/hts-cust-dev'
+          cli_config_credentials_hostname: 'app.terraform.io'
           cli_config_credentials_token: ${{ secrets.TFC_TOKEN }}
           terraform_version: latest
           terraform_wrapper: true
-  
-  format:
-    name: Format and Lint Terraform Configuration
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: hashicorp/setup-terraform@v1.2.1
 
-      - name: Terraform Format
-        id: fmt
-        run: terraform fmt -list=true -write=false -diff=true
-        continue-on-error: true
-  
       - name: Terraform Init
         id: init
         run: terraform init
+  
+  # format:
+  #   name: Format and Lint Terraform Configuration
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - uses: hashicorp/setup-terraform@v1.2.1
 
-      - name: Terraform Validate
-        id: validate
-        run: terraform validate -no-color
+  #     - name: Terraform Format
+  #       id: fmt
+  #       run: terraform fmt -list=true -write=false -diff=true
+  #       continue-on-error: true
+  
 
-      - name: Terraform Plan
-        id: plan
-        run: terraform plan -no-color
-        continue-on-error: false
+
+  #     - name: Terraform Validate
+  #       id: validate
+  #       run: terraform validate -no-color
+
+  #     - name: Terraform Plan
+  #       id: plan
+  #       run: terraform plan -no-color
+  #       continue-on-error: false
