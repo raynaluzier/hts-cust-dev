@@ -5,6 +5,16 @@ terraform {
       version = "~> 3.0"
     }
   }
+
+  backend "remote" {
+    hostname = "app.terraform.io"
+    organization = "raynaluzier"  ## Update for customer
+
+    workspaces {
+      name = "hts-cust-dev"       ## make more dynamic
+    }
+  }
+
 }
 
 # Configure the AWS Provider
