@@ -32,15 +32,7 @@ jobs:
           terraform_version: latest
           terraform_wrapper: true
 
-
-      # - name: Terraform Apply
-      #   id: apply
-      #   run: terraform apply
-      #   continue-on-error: false
-
-      # - name: merge-branch
-      #   uses: devmasx/merge-branch@master
-      #   with: 
-      #     type: now
-      #     target_branch: 'main'
-      #     github_token: ${{ github.token }}
+      - name: Terraform Apply
+        id: apply
+        run: terraform apply
+        continue-on-error: false
