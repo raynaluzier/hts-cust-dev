@@ -1,6 +1,6 @@
 name: Development Check and Validation
 on:
-  pull_request:  ## Change to pull_request
+  pull_request:
     branches:
       - 'development'
 
@@ -50,20 +50,29 @@ jobs:
             #### Terraform Initialization \`${{ steps.init.outcome }}\`
             #### Terraform Validation \`${{ steps.validate.outputs.stdout }}\`
             #### Terraform Plan \`${{ steps.plan.outcome }}\`
-
+            
             <details><summary>Plan Output Shown Below:</summary>
-
+            
             \`\`\`\n
             ${process.env.PLAN}
             \`\`\`
-
+            
             </details>
-
+            
             *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`, Working Directory: \`${{ env.tf_actions_working_dir }}\`, Workflow: \`${{ github.workflow }}\`*`;
-
+              
             github.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: output
             })
+        
+      - name: merge-branch
+        uses: devmasx/merge-branch@master
+        if: steps.plan.outcome == 'success'
+        with: 
+          type: now
+          target_branch: 'development'
+          github_token: ${{ github.token }}
+
