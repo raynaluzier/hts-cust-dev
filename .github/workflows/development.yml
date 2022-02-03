@@ -30,7 +30,9 @@ jobs:
 
       - name: Initialize TFLint
         run: tflint --init
-
+      
+      # Will only show details if there are issues
+      # The action itself has no outputs
       - name: Run TFLint
         run: tflint -f compact
   
