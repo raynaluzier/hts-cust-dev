@@ -67,7 +67,15 @@ jobs:
               repo: context.repo.repo,
               body: output
             })
-        
+
+      - name: add-pr-comments
+        uses: mshick/add-pr-comment@v1
+        with:
+          message: process.env.PLAN
+          repo-token:  ${{ secrets.GH_TOKEN }}
+          repo-token-user-login: 'github-actions[bot]'
+          allow-repeats: false
+
       - name: merge-branch
         uses: devmasx/merge-branch@master
         if: steps.plan.outcome == 'success'
