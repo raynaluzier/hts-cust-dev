@@ -9,6 +9,16 @@ env:
     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
 jobs:
+  merge-branch:
+    name: Merge Branch
+    runs-on: ubuntu-latest
+    steps:
+      - name: merge-branch
+        uses: devmasx/merge-branch@master
+        with: 
+          type: now
+          target_branch: 'main'
+          github_token: ${{ github.token }}
 
   setup-terraform:
     name: Setup Terraform
@@ -27,3 +37,10 @@ jobs:
       #   id: apply
       #   run: terraform apply
       #   continue-on-error: false
+
+      # - name: merge-branch
+      #   uses: devmasx/merge-branch@master
+      #   with: 
+      #     type: now
+      #     target_branch: 'main'
+      #     github_token: ${{ github.token }}
