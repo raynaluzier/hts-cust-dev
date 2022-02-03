@@ -17,8 +17,6 @@ terraform {
 
 }
 
-## Added stuff to test pipe
-
 # Configure the AWS Provider
 provider "aws" {
   region = var.region
