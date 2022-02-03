@@ -97,11 +97,4 @@ jobs:
               body: output
             })
 
-      # - name: Merge Temp Feature Branch to Development
-      #   uses: devmasx/merge-branch@master
-      #   if: steps.plan.outcome == 'success'
-      #   with: 
-      #     type: now
-      #     target_branch: 'development'
-      #     github_token: ${{ github.token }}
 
