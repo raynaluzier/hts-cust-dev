@@ -9,6 +9,31 @@ env:
     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
 jobs:
+  tflint:
+    name: Code Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        name: Cache Plugin Directory
+        with:
+          path: ~/.tflint.d/plugins
+          key: ubuntu-latest-tflint-${{ hashFiles('.tflint.hcl')}}
+      
+      - name: Setup TFLint
+        uses: terraform-linters/setup-tflint@v1
+        with:
+          tflint_version: latest
+      
+      - name: Show Version
+        run: tflint --version
+
+      - name: Initialize TFLint
+        run: tflint --init
+
+      - name: Run TFLint
+        run: tflint -f compact
+  
   setup-terraform:
     name: Setup & Check Terraform
     runs-on: ubuntu-latest
