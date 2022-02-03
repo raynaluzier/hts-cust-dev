@@ -45,7 +45,7 @@ module "ubuntu-vm" {
   tag_supportteam  = var.tag_supportteam
 }
 
-module "ubuntu-vm-again" {
+/* module "ubuntu-vm-again" {
   source  = "app.terraform.io/raynaluzier/ec2-ubuntu/aws"
   version = "0.0.2"
 
@@ -66,4 +66,4 @@ module "ubuntu-vm-again" {
   tag_application  = var.tag_application
   tag_environment  = var.tag_environment
   tag_supportteam  = var.tag_supportteam
-}
+} */
