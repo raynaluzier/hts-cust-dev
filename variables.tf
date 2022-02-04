@@ -18,24 +18,36 @@ variable "region" {
   default     = "us-east-1"
 }
 
+/*
 variable "vpc_name" {
   description = "Target VPC to which the VM will be deployed"
   type        = string
   default     = "us-east-1"
 }
 
-/*
-variable "subnet_name" {
-  description = "Target subnet to which the VM will be deployed"
-  type        = string
-  default     = "sub_16"
-}
-*/
-
 variable "sec_grp_name" {
   description = "Target security group to which the VM will be joined"
   type        = string
   default     = "hts-test-sg"
+}
+*/
+
+variable "vpc_id" {
+  description = "Target VPC to which the VM will be deployed"
+  type        = string
+  default     = ""
+}
+
+variable "sec_group_id" {
+  description = "Target security group to which the VM will be joined"
+  type        = string
+  default     = ""
+}
+
+variable "subnet_id" {
+  description = "Target subnet to which the VM will be joined"
+  type        = string
+  default     = ""
 }
 
 ## Virtual Machine Info ##
