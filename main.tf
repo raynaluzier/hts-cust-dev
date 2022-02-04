@@ -24,7 +24,7 @@ provider "aws" {
 
 module "ubuntu-vm" {
   source  = "app.terraform.io/raynaluzier/ec2-ubuntu/aws"
-  version = "0.0.6"
+  version = "0.0.7"
 
   #source  = "github.com/orgs/hearst-terraform-modules/terraform-aws-ec2-ubuntu"
   #version = "0.0.1"
