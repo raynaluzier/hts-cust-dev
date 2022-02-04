@@ -16,3 +16,8 @@ tag_product      = "This is development work"
 tag_application  = "VM"
 tag_environment  = "Prod"
 tag_supportteam  = "hts.sre@domain.com"
+
+custom_tags = {
+    location = "ohio"
+    owner    = "rayna"
+}
