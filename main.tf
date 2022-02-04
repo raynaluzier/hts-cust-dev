@@ -24,7 +24,7 @@ provider "aws" {
 
 module "ec2-linux" {
   source  = "app.terraform.io/RaynaLuzier/ec2-linux/aws"
-  version = "0.0.2"
+  version = "0.0.3"
 
   #source  = "github.com/orgs/hearst-terraform-modules/terraform-aws-ec2-linux"
   #version = "0.0.1"
