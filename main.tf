@@ -22,8 +22,8 @@ provider "aws" {
   region = var.region
 }
 
-module "linux-vm" {
-  source  = "app.terraform.io/raynaluzier/ec2-linux/aws"
+module "ec2-linux" {
+  source  = "app.terraform.io/RaynaLuzier/ec2-linux/aws"
   version = "0.0.2"
 
   #source  = "github.com/orgs/hearst-terraform-modules/terraform-aws-ec2-linux"
@@ -46,12 +46,9 @@ module "linux-vm" {
   tag_supportteam  = var.tag_supportteam
 }
 
-/* module "linux-vm-again" {
-  source  = "app.terraform.io/raynaluzier/ec2-linux/aws"
-  version = "0.0.1"
-
-  #source  = "github.com/orgs/hearst-terraform-modules/terraform-aws-ec2-linux"
-  #version = "0.0.1"
+/* module "ec2-linux-again" {
+  source  = "app.terraform.io/RaynaLuzier/ec2-linux/aws"
+  version = "0.0.2"
 
   region        = var.region
   vpc_name      = var.vpc_name
