@@ -22,11 +22,11 @@ provider "aws" {
   region = var.region
 }
 
-module "ubuntu-vm" {
-  source  = "app.terraform.io/raynaluzier/ec2-ubuntu/aws"
-  version = "0.0.7"
+module "linux-vm" {
+  source  = "app.terraform.io/raynaluzier/ec2-linux/aws"
+  version = "0.0.1"
 
-  #source  = "github.com/orgs/hearst-terraform-modules/terraform-aws-ec2-ubuntu"
+  #source  = "github.com/orgs/hearst-terraform-modules/terraform-aws-ec2-linux"
   #version = "0.0.1"
 
   region           = var.region
@@ -46,11 +46,11 @@ module "ubuntu-vm" {
   tag_supportteam  = var.tag_supportteam
 }
 
-/* module "ubuntu-vm-again" {
-  source  = "app.terraform.io/raynaluzier/ec2-ubuntu/aws"
-  version = "0.0.2"
+/* module "linux-vm-again" {
+  source  = "app.terraform.io/raynaluzier/ec2-linux/aws"
+  version = "0.0.1"
 
-  #source  = "github.com/orgs/hearst-terraform-modules/terraform-aws-ec2-ubuntu"
+  #source  = "github.com/orgs/hearst-terraform-modules/terraform-aws-ec2-linux"
   #version = "0.0.1"
 
   region        = var.region
