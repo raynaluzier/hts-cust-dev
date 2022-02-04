@@ -18,6 +18,6 @@ tag_environment  = "Prod"
 tag_supportteam  = "hts.sre@domain.com"
 
 custom_tags = {
-    location = "ohio"
-    owner    = "rayna"
+    #location = "ohio"
+    #owner    = "rayna"
 }
