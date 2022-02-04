@@ -111,3 +111,9 @@ variable "tag_supportteam" {
   type        = string
   default     = "hts.sre@hearst.com"
 }
+
+variable "custom_tags" {
+  description   = "Additional map of custom tags to add to the machine; if required"
+  type          = map(string)
+  default       = {}
+}
